@@ -17,7 +17,10 @@ public class AttractionEndpoint {
 		as.proberen();
 		Attraction attr = new Attraction();
 		attr.setId(27);
-		attr.setMessage("Hallo Dylan");
+		attr.setLocation("Leiden");
+		attr.setDateAndTime("12-12-2019:14.00");
+		attr.setDescription("Awesome demonstration of our digital prowess");
+		attr.setEventName("CVM-Demo");
 		return attr;
 	}
 }
