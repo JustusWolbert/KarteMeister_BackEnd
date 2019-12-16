@@ -15,19 +15,15 @@ public class AttractionService {
 		ar.save(attr);
 	}
 	
-	@Transactional
+	@Transactional						// Transactional is used for adaptations, not needed for GET
 	public Attraction getAttractionEntry(String eventName) {
-		
-		Attraction attract = new Attraction();
-		
+				
 		for(Attraction attr : ar.findAll()) {
 			if(attr.getEventName().equals(eventName)) {
-				attract = attr;
-				break;
+				return attr;
 			}
 		}
-		
-		return attract;
+		return null;
 	}
 
 }
