@@ -1,9 +1,11 @@
 package com.KarteMeister.KMBackEnd.REST;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,6 +34,16 @@ public class AttractionEndpoint {
 				attr.getDescription() + " " +
 				attr.getEventName());
 		as.postAttractionEntry(attr);
+	}
+	
+	@PutMapping("attraction/change/{firstValue}/{secondValue}/")
+	public void xmlPut(@PathVariable("firstValue") String firstValue, @PathVariable("secondValue") String secondValue){
+		as.setLocationForEvent(firstValue, secondValue);
 		
+	}
+	
+	@DeleteMapping("attraction/delete/{firstValue}/")
+	public void xmlDelete(@PathVariable("firstValue") String firstValue){
+		as.delete(firstValue);
 	}
 }
