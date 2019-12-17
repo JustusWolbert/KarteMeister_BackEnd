@@ -14,10 +14,10 @@ import com.KarteMeister.KMBackEnd.domein.Attraction;
 public interface AttractionRepository extends CrudRepository<Attraction, Long>{
 	
 	@Override
-	@Transactional(timeout=10)
+	@Transactional
 	public List<Attraction> findAll();
 	
-	public Attraction findByEventName(String eventName);
+	public Attraction findByArtistName(String artistName);
 	
 	/*
 	@Modifying

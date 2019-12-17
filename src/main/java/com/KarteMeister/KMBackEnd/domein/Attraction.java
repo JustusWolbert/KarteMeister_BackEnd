@@ -1,48 +1,75 @@
 package com.KarteMeister.KMBackEnd.domein;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Attraction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private String location;
-	private String dateAndTime;
+	
+	private String tourName;
+	private String artistName;
+	private String category;
+	
 	private String description;
-	private String eventName;
+	
+	@OneToMany
+	private List<Event> eventList;
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getLocation() {
-		return location;
+
+	public String getTourName() {
+		return tourName;
 	}
-	public void setLocation(String location) {
-		this.location = location;
+
+	public void setTourName(String tourName) {
+		this.tourName = tourName;
 	}
-	public String getDateAndTime() {
-		return dateAndTime;
+
+	public String getArtistName() {
+		return artistName;
 	}
-	public void setDateAndTime(String dateAndTime) {
-		this.dateAndTime = dateAndTime;
+
+	public void setArtistName(String artistName) {
+		this.artistName = artistName;
 	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getEventName() {
-		return eventName;
+
+	public List<Event> getEventList() {
+		return eventList;
 	}
-	public void setEventName(String eventName) {
-		this.eventName = eventName;
+
+	public void setEventList(List<Event> eventList) {
+		this.eventList = eventList;
 	}
 	
 }
