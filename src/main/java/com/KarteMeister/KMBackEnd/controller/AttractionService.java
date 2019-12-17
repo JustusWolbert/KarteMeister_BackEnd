@@ -5,48 +5,40 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.KarteMeister.KMBackEnd.domein.Attraction;
+import com.KarteMeister.KMBackEnd.domein.Event;
 
 @Service
 public class AttractionService {
 	@Autowired
 	AttractionRepository ar;
 	
+	@Autowired
+	EventRepository er;
+	
+	
 	public void postAttractionEntry(Attraction attr) {
 		ar.save(attr);
+		for(Event e : attr.getEventList()) {
+			System.out.println("event test");
+			System.out.println(e.getEventName());
+			er.save(e);
+		}
 	}
 	
-	public Attraction getAttractionEntry(String eventName) {
-		/*		
-		for(Attraction attr : ar.findAll()) {
-			if(attr.getEventName().equals(eventName)) {
-				return attr;
-			}
-		}
-		return null;
-		*/
-		Attraction attr = ar.findByEventName(eventName);
+	public Attraction getAttractionEntry(String artistName) {
+		Attraction attr = ar.findByArtistName(artistName);
 		return attr;
 	}
 	
-	/*
-	@Transactional						
-	public Attraction changeAttractionEntry(String eventName, String newDateAndTime) {
-		Attraction att = getAttractionEntry(eventName);
-		att.setDateAndTime(newDateAndTime);
-		return null;
-	} */
 	
-	public void setLocationForEvent(String location, String eventName) {
-		Attraction attr = ar.findByEventName(eventName);
-		attr.setLocation(location);
+	public void setCategoryForAttraction(String category, String artistName) {
+		Attraction attr = ar.findByArtistName(artistName);
+		attr.setCategory(category);
 		ar.save(attr);
-		
-		//return 0;
 	}
 	
-	public void delete(String eventName) {
-		Attraction attr = ar.findByEventName(eventName);
-		
+	public void delete(String artistName) {
+		Attraction attr = ar.findByArtistName(artistName);
 		ar.deleteById(attr.getId());
 	}
 	
