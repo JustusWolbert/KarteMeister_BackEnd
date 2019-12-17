@@ -14,6 +14,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;  
     private String location;
+    private String venue;
     private String dateAndTime;
     private String description;
     private String eventName;
@@ -30,7 +31,13 @@ public class Event {
     public void setLocation(String location) {
         this.location = location;
     }
-    public String getDateAndTime() {
+    public String getVenue() {
+		return venue;
+	}
+	public void setVenue(String venue) {
+		this.venue = venue;
+	}
+	public String getDateAndTime() {
         return dateAndTime;
     }
     public void setDateAndTime(String dateAndTime) {

@@ -1,5 +1,7 @@
 package com.KarteMeister.KMBackEnd.REST;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.KarteMeister.KMBackEnd.controller.AttractionService;
 import com.KarteMeister.KMBackEnd.domein.Attraction;
+import com.KarteMeister.KMBackEnd.domein.Event;
 
 @RestController
 public class AttractionEndpoint {
@@ -20,7 +23,6 @@ public class AttractionEndpoint {
 	@GetMapping("attraction/{firstValue}/")
 	public Attraction xmlGetter(@PathVariable("firstValue") String firstValue){
 		System.out.println("send");
-		
 		Attraction attr = as.getAttractionEntry(firstValue);
 		return attr;
 	}
@@ -28,17 +30,18 @@ public class AttractionEndpoint {
 	@PostMapping("attraction")
 	public void xmlPoster(@RequestBody Attraction attr){
 		System.out.println("received:");
-		System.out.println(attr.getId() + " " +	
-				attr.getLocation() + " " +
-				attr.getDateAndTime() + " " +
-				attr.getDescription() + " " +
-				attr.getEventName());
+		List<Event> events = attr.getEventList();
+		
+		System.out.println(events.isEmpty());
+		
+		
+		//System.out.println(e.getEventName());
 		as.postAttractionEntry(attr);
 	}
 	
 	@PutMapping("attraction/change/{firstValue}/{secondValue}/")
 	public void xmlPut(@PathVariable("firstValue") String firstValue, @PathVariable("secondValue") String secondValue){
-		as.setLocationForEvent(firstValue, secondValue);
+		as.setCategoryForAttraction(firstValue, secondValue);
 		
 	}
 	
