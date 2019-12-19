@@ -30,14 +30,19 @@ public class AttractionEndpoint {
 	@PostMapping("attraction")
 	public void xmlPoster(@RequestBody Attraction attr){
 		System.out.println("received:");
-		List<Event> events = attr.getEventList();
+		//List<Event> events = attr.getEventList();
 		
-		System.out.println(events.isEmpty());
+		//System.out.println(events.isEmpty());
 		
 		
 		//System.out.println(e.getEventName());
 		as.postAttractionEntry(attr);
 	}
+	
+	
+	
+	
+	
 	
 	@PutMapping("attraction/change/{firstValue}/{secondValue}/")
 	public void xmlPut(@PathVariable("firstValue") String firstValue, @PathVariable("secondValue") String secondValue){

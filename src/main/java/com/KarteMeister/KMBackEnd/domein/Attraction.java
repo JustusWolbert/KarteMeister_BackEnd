@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,8 +22,10 @@ public class Attraction {
 	
 	private String description;
 	
-	@OneToMany
+	@OneToMany(mappedBy="attraction")
 	private List<Event> eventList;
+	@ManyToOne
+	private Organiser organiser;
 
 	public long getId() {
 		return id;

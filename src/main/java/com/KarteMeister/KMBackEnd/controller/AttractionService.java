@@ -18,11 +18,12 @@ public class AttractionService {
 	
 	public void postAttractionEntry(Attraction attr) {
 		ar.save(attr);
-		for(Event e : attr.getEventList()) {
-			System.out.println("event test");
-			System.out.println(e.getEventName());
-			er.save(e);
-		}
+		System.out.println(attr);
+		//for(Event e : attr.getEventList()) {
+		//	System.out.println("event test");
+		//	System.out.println(e.getEventName());
+		//	er.save(e);
+		//}
 	}
 	
 	public Attraction getAttractionEntry(String artistName) {
