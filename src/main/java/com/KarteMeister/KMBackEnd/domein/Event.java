@@ -30,7 +30,7 @@ public class Event {
 	@OneToMany(mappedBy="event")
 	private List<Ticket> ticketList;
 	@ManyToOne
-	private Event event;
+	private Attraction attraction;
 	
 	public long getId() {
 		return id;
