@@ -3,33 +3,41 @@ package com.KarteMeister.KMBackEnd.domein;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Event {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;  
+	
 	private String eventName;
 	private String location; //stad
 	private String venue;
-	private String timeAndDate;
+	private String dateAndTime;
 	private String description;
 	private int amountTicket;
-	private int priceTicket;
-	private int eventSales;
+	private double priceTicket;
+	private double eventSales;
 	private boolean lockerAvailable;
 	private boolean consumptionAvailable;
-	private int priceLocker;
-	private int priceConsumption;
+	private double priceLocker;
+	private double priceConsumption;
 	
 	@OneToMany(mappedBy="event")
 	private List<Ticket> ticketList;
-	@ManyToOne
+	
+	@ManyToOne//(fetch = FetchType.LAZY)
+	@JoinColumn(name="attraction_id", nullable=false)
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private Attraction attraction;
 	
 	public long getId() {
@@ -56,11 +64,11 @@ public class Event {
 	public void setVenue(String venue) {
 		this.venue = venue;
 	}
-	public String getTimeAndDate() {
-		return timeAndDate;
+	public String getDateAndTime() {
+		return dateAndTime;
 	}
-	public void setTimeAndDate(String timeAndDate) {
-		this.timeAndDate = timeAndDate;
+	public void setDateAndTime(String dateAndTime) {
+		this.dateAndTime = dateAndTime;
 	}
 	public String getDescription() {
 		return description;
@@ -74,16 +82,16 @@ public class Event {
 	public void setAmountTicket(int amountTicket) {
 		this.amountTicket = amountTicket;
 	}
-	public int getPriceTicket() {
+	public double getPriceTicket() {
 		return priceTicket;
 	}
-	public void setPriceTicket(int priceTicket) {
+	public void setPriceTicket(double priceTicket) {
 		this.priceTicket = priceTicket;
 	}
-	public int getEventSales() {
+	public double getEventSales() {
 		return eventSales;
 	}
-	public void setEventSales(int eventSales) {
+	public void setEventSales(double eventSales) {
 		this.eventSales = eventSales;
 	}
 	public boolean isLockerAvailable() {
@@ -98,18 +106,25 @@ public class Event {
 	public void setConsumptionAvailable(boolean consumptionAvailable) {
 		this.consumptionAvailable = consumptionAvailable;
 	}
-	public int getPriceLocker() {
+	public double getPriceLocker() {
 		return priceLocker;
 	}
-	public void setPriceLocker(int priceLocker) {
+	public void setPriceLocker(double priceLocker) {
 		this.priceLocker = priceLocker;
 	}
-	public int getPriceConsumption() {
+	public double getPriceConsumption() {
 		return priceConsumption;
 	}
-	public void setPriceConsumption(int priceConsumption) {
+	public void setPriceConsumption(double priceConsumption) {
 		this.priceConsumption = priceConsumption;
 	}
+	public Attraction getAttraction() {
+		return attraction;
+	}
+	public void setAttraction(Attraction attraction) {
+		this.attraction = attraction;
+	}
+	
 	
 	
 	

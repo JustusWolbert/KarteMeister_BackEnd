@@ -18,9 +18,6 @@ public class AttractionService {
 	
 	public void postAttractionEntry(Attraction attr) {
 		ar.save(attr);
-
-
-
 	}
 	
 	public Attraction getAttractionEntry(String artistName) {
@@ -40,5 +37,6 @@ public class AttractionService {
 		ar.deleteById(attr.getId());
 	}
 	
+
 
 }

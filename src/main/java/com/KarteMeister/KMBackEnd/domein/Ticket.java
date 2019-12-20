@@ -20,14 +20,14 @@ public class Ticket {
     private boolean includeLocker;
     private boolean includeConsumption;
     private int amountConsumption;
-    private int ticketPrice;
+    private double ticketPrice;
     
     @ManyToOne
     private Event event;
     @ManyToOne
     private Visitor visitor;
     
-    public int addLocker(){
+    public double addLocker(){
         if(this.includeLocker == true) {
         	this.ticketPrice += event.getPriceLocker();
         	return ticketPrice;
@@ -36,7 +36,7 @@ public class Ticket {
         }
     }
     
-    public int addConsumption(int amountConsumptions) {
+    public double addConsumption(int amountConsumptions) {
         if(this.includeConsumption == true) {
         	this.ticketPrice += (amountConsumptions * event.getPriceConsumption());
         	return ticketPrice;
@@ -77,12 +77,12 @@ public class Ticket {
 		this.id = id;
 	}
 	
-	public int setTicketPrice() {
+	public double setTicketPrice() {
 		this.ticketPrice = event.getPriceTicket();
 		return ticketPrice;
 	}
 	
-	public int getTicketPrice() {
+	public double getTicketPrice() {
 		return ticketPrice;
 	}
 

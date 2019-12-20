@@ -19,6 +19,8 @@ public interface AttractionRepository extends CrudRepository<Attraction, Long>{
 	
 	public Attraction findByArtistName(String artistName);
 	
+	
+	
 	/*
 	@Modifying
 	@Query("update Attraction att set att.location = ?1 where u.eventName = ?2")

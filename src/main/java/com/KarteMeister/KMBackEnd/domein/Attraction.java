@@ -16,7 +16,7 @@ public class Attraction {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	private String tourName;
+	private String attractionName;
 	private String artistName;
 	private String category;
 	
@@ -24,6 +24,7 @@ public class Attraction {
 	
 	@OneToMany(mappedBy="attraction")
 	private List<Event> eventList;
+	
 	@ManyToOne
 	private Organiser organiser;
 
@@ -35,12 +36,12 @@ public class Attraction {
 		this.id = id;
 	}
 
-	public String getTourName() {
-		return tourName;
+	public String getAttractionName() {
+		return attractionName;
 	}
 
-	public void setTourName(String tourName) {
-		this.tourName = tourName;
+	public void setAttractionName(String attractionName) {
+		this.attractionName = attractionName;
 	}
 
 	public String getArtistName() {

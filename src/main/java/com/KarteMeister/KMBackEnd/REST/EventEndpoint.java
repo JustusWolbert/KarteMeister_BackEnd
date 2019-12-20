@@ -10,15 +10,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.KarteMeister.KMBackEnd.controller.AttractionRepository;
+import com.KarteMeister.KMBackEnd.controller.EventRepository;
 import com.KarteMeister.KMBackEnd.controller.EventService;
-
+import com.KarteMeister.KMBackEnd.domein.Attraction;
 import com.KarteMeister.KMBackEnd.domein.Event;
 
 @RestController
 public class EventEndpoint {
 	@Autowired
 	EventService es; 
+	@Autowired
+	AttractionRepository ar;
+
 	
 	@GetMapping("event/{firstValue}/")
 	public Event xmlGetter(@PathVariable("firstValue") String firstValue) {
@@ -27,11 +31,16 @@ public class EventEndpoint {
 		return ev;
 	}
 	
-	@PostMapping("event")
-	public void xmlPoster(@RequestBody Event ev) {
-		System.out.println("Reveived: "+ev);
-		es.postEventEntry(ev);
+	@PostMapping("{firstValue}/event")
+	public void xmlPoster(@RequestBody Event ev, @PathVariable("firstValue") long id) {
+		System.out.println(id);
+		System.out.println(ev.getEventName());
+		System.out.println("Reveived: ");
+
+		es.postEventEntry(ev, id);
 	}
+
+	
 }
 
 

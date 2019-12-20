@@ -11,6 +11,7 @@ import com.KarteMeister.KMBackEnd.domein.Event;
 
 @Component
 public interface EventRepository extends CrudRepository<Event, Long>{
+	
 	@Override
 	@Transactional
 	public List<Event> findAll();
