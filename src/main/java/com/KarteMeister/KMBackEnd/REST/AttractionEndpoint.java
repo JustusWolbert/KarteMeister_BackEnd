@@ -21,30 +21,6 @@ public class AttractionEndpoint {
 	@Autowired
 	AttractionService as;
 	
-	@GetMapping("stub")
-	public List<Attraction> getStub() {
-		System.out.println("Send stub");
-		
-		List<Attraction> attrList = new ArrayList<Attraction>();
-		
-		Attraction attr1 = new Attraction();
-		attr1.setTourName("Beat Bumpers");
-		attr1.setArtistName("DJ Spring and Boot");
-		attr1.setCategory("Techno");
-		attr1.setDescription("Stamp stamp stamp!");
-		
-		Attraction attr2 = new Attraction();
-		attr2.setTourName("Counter-counterpoints");
-		attr2.setArtistName("Steve Reich");
-		attr2.setCategory("Minimal");
-		attr2.setDescription("Min going to the max.");
-		
-		attrList.add(attr1);
-		attrList.add(attr2);
-		
-		return attrList;
-	}
-	
 	@GetMapping("attraction/{firstValue}/")
 	public Attraction xmlGetter(@PathVariable("firstValue") String firstValue){
 		System.out.println("send");
@@ -55,6 +31,7 @@ public class AttractionEndpoint {
 	@PostMapping("attraction")
 	public void xmlPoster(@RequestBody Attraction attr){
 		System.out.println("received:");
+
 		as.postAttractionEntry(attr);
 	}
 	
@@ -68,4 +45,9 @@ public class AttractionEndpoint {
 	public void xmlDelete(@PathVariable("firstValue") String firstValue){
 		as.delete(firstValue);
 	}
+	
+
+	
+	
+	
 }

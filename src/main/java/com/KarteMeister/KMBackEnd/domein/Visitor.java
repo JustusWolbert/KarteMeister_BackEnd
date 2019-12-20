@@ -13,12 +13,14 @@ public class Visitor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
-    int wallet;
-    String visitorName;
+    private long id;
+    private int wallet;
+    private String visitorName;
+    private String loginName;
+    private String password;
     
-    @OneToMany
-    private List<Ticket> ticketdemo;
+    @OneToMany(mappedBy="visitor")
+    private List<Ticket> ticketList;
 
 	public long getId() {
 		return id;
@@ -44,14 +46,31 @@ public class Visitor {
 		this.visitorName = visitorName;
 	}
 
-	public List<Ticket> getTicketdemo() {
-		return ticketdemo;
+	public String getLoginName() {
+		return loginName;
 	}
 
-	public void setTicketdemo(List<Ticket> ticketdemo) {
-		this.ticketdemo = ticketdemo;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
-    
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public List<Ticket> getTicketList() {
+		return ticketList;
+	}
+
+	public void setTicketList(List<Ticket> ticketList) {
+		this.ticketList = ticketList;
+	}
+
+	
     
 
 }

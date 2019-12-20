@@ -16,35 +16,58 @@ public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
-    boolean locker;
-    boolean consumption;
-    boolean meal;
-    int price;
-    int priceLocker;
-    int priceConsumption;
-    int priceMeal;
+    private long id;
+    private boolean includeLocker;
+    private boolean includeConsumption;
+    private int amountConsumption;
+    private double ticketPrice;
     
     @ManyToOne
     private Event event;
+    @ManyToOne
+    private Visitor visitor;
     
-    public int addLocker(){
-        locker = true;
-        price += priceLocker;
-        return price;
+    public double addLocker(){
+        if(this.includeLocker == true) {
+        	this.ticketPrice += event.getPriceLocker();
+        	return ticketPrice;
+        }else {
+        	return ticketPrice;
+        }
     }
     
-    public int addConsumption() {
-        consumption = true;
-        price += priceConsumption;
-        return price;
+    public double addConsumption(int amountConsumptions) {
+        if(this.includeConsumption == true) {
+        	this.ticketPrice += (amountConsumptions * event.getPriceConsumption());
+        	return ticketPrice;
+        }else {
+        return ticketPrice;
+        }
     }
     
-    public int addMeal() {
-        meal = true;
-        price += priceLocker;
-        return price;
-    }
+    public boolean isIncludeLocker() {
+		return includeLocker;
+	}
+
+	public void setIncludeLocker(boolean includeLocker) {
+		this.includeLocker = includeLocker;
+	}
+
+	public boolean isIncludeConsumption() {
+		return includeConsumption;
+	}
+
+	public void setIncludeConsumption(boolean includeConsumption) {
+		this.includeConsumption = includeConsumption;
+	}
+
+	public int getAmountConsumption() {
+		return amountConsumption;
+	}
+
+	public void setAmountConsumption(int amountConsumption) {
+		this.amountConsumption = amountConsumption;
+	}
 
 	public long getId() {
 		return id;
@@ -53,70 +76,24 @@ public class Ticket {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-	public boolean isLocker() {
-		return locker;
+	
+	public double setTicketPrice() {
+		this.ticketPrice = event.getPriceTicket();
+		return ticketPrice;
+	}
+	
+	public double getTicketPrice() {
+		return ticketPrice;
 	}
 
-	public void setLocker(boolean locker) {
-		this.locker = locker;
-	}
 
-	public boolean isConsumption() {
-		return consumption;
-	}
+//	public Event getEvent() {
+//		return event;
+//	}
 
-	public void setConsumption(boolean consumption) {
-		this.consumption = consumption;
-	}
-
-	public boolean isMeal() {
-		return meal;
-	}
-
-	public void setMeal(boolean meal) {
-		this.meal = meal;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public int getPriceLocker() {
-		return priceLocker;
-	}
-
-	public void setPriceLocker(int priceLocker) {
-		this.priceLocker = priceLocker;
-	}
-
-	public int getPriceConsumption() {
-		return priceConsumption;
-	}
-
-	public void setPriceConsumption(int priceConsumption) {
-		this.priceConsumption = priceConsumption;
-	}
-
-	public int getPriceMeal() {
-		return priceMeal;
-	}
-
-	public void setPriceMeal(int priceMeal) {
-		this.priceMeal = priceMeal;
-	}
-
-	public Event getEvent() {
-		return event;
-	}
-
-	public void setEvent(Event event) {
-		this.event = event;
-	}
+//	public void setEvent(Event event) {
+//		this.event = event;
+//	}
     
     
     
