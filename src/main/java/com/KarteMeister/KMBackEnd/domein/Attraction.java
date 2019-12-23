@@ -80,5 +80,15 @@ public class Attraction {
 	public void setEventList(List<Event> eventList) {
 		this.eventList = eventList;
 	}
+
+	public Organiser getOrganiser() {
+		return organiser;
+	}
+
+	public void setOrganiser(Organiser organiser) {
+		this.organiser = organiser;
+	}
+
+	
 	
 }

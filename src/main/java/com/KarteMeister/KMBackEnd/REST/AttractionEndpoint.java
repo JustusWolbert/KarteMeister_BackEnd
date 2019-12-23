@@ -28,7 +28,7 @@ public class AttractionEndpoint {
 	public void xmlPoster(@RequestBody Attraction attr){
 		System.out.println("received:");
 
-		as.postAttractionEntry(attr);
+		//as.postAttractionEntry(attr); 	needs organiser ID
 	}
 	
 	@PutMapping("attraction/change/{firstValue}/{secondValue}/")

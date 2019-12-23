@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.KarteMeister.KMBackEnd.domein.Attraction;
 import com.KarteMeister.KMBackEnd.domein.Event;
+import com.KarteMeister.KMBackEnd.domein.Image;
+import com.KarteMeister.KMBackEnd.domein.Organiser;
 
 @Service
 public class AttractionService {
@@ -15,8 +17,16 @@ public class AttractionService {
 	@Autowired
 	EventRepository er;
 	
+	@Autowired
+	OrganiserRepository or;
 	
-	public void postAttractionEntry(Attraction attr) {
+	@Autowired
+	ImageRepository ir;
+	
+	
+	public void postAttractionEntry(Attraction attr, long id) {
+		Organiser o = or.findById(id).get();
+		attr.setOrganiser(o);
 		ar.save(attr);
 	}
 	
@@ -37,6 +47,15 @@ public class AttractionService {
 		ar.deleteById(attr.getId());
 	}
 	
+	public void postOrganiserEntry(Organiser orga) {
+		or.save(orga);
+	}
+
+	public Organiser getOrganiserEntry(String string) {
+		Organiser o = or.findByName(string);
+		return o;
+	}
+
 
 
 }
