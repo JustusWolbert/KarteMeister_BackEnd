@@ -26,23 +26,30 @@ public class PurchaseService {
 	}
 	
 	public Ticket PostTicketEntry(Ticket tckt, long EveId, long VisId) {
-		System.out.println(tckt.getId() + EveId + VisId);
 		Event ev = er.findById(EveId).get();
-		System.out.println(ev.getId());
-		ev.sellTicket();
-		er.save(ev);
 		
 		Visitor vs = vr.findById(VisId).get();
 				
 		tckt.setVisitor(vs);
 		tckt.setEvent(ev);
-		
+		tckt.setTicketPrice();
 		tckt.addConsumption(tckt.getAmountConsumption());
 		tckt.addLocker();
-		System.out.println(tckt.getTicketPrice());
+		System.out.println("Ticket price: "+tckt.getTicketPrice());
 		
-		tr.save(tckt);
-		return tckt;
+		if( vs.getWallet() > tckt.getTicketPrice()) {
+			vs.setWallet(vs.getWallet()-tckt.getTicketPrice());
+			tr.save(tckt);
+			vr.save(vs);
+			ev.sellTicket();
+			er.save(ev);
+			System.out.println(vs.getVisitorName()+" bought ticket "+tckt.getId());
+			return tckt;
+		}else {
+			System.out.println(vs.getVisitorName()+" did not have enough money.");
+			return null;
+		}
+		
 	}
 	
 	

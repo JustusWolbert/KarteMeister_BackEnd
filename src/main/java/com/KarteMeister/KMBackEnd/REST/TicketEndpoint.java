@@ -18,10 +18,10 @@ public class TicketEndpoint {
 	@Autowired
 	PurchaseService ps;
 	
-	@GetMapping("ticket/{firstValue}/")
-	public Ticket xmlGetter(@PathVariable("firstValue") long firstValue){
+	@GetMapping("ticket/{ticketId}/")
+	public Ticket xmlGetter(@PathVariable("ticketId") long ticketId){
 		System.out.println("send");
-		Ticket tckt = ps.getTicketEntry(firstValue);
+		Ticket tckt = ps.getTicketEntry(ticketId);
 		return tckt;
 	}
 	

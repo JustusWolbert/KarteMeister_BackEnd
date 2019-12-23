@@ -3,7 +3,9 @@ package com.KarteMeister.KMBackEnd.domein;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,7 @@ public class Attraction {
 	
 	private String description;
 	
-	@OneToMany(mappedBy="attraction")
+	@OneToMany(mappedBy="attraction", fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<Event> eventList;
 	
 	@ManyToOne

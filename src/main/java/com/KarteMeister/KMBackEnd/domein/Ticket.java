@@ -26,10 +26,12 @@ public class Ticket {
     private double ticketPrice;
     
     @ManyToOne
+    @JoinColumn(name="event_id", nullable = false)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Event event;
     @ManyToOne
     @JoinColumn(name="visitor_id", nullable = false)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     private Visitor visitor;
     
    
@@ -85,7 +87,7 @@ public class Ticket {
 	}
 	
 	public double setTicketPrice() {
-		this.ticketPrice = event.getPriceTicket();
+		this.ticketPrice += event.getPriceTicket();
 		return ticketPrice;
 	}
 	

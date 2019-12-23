@@ -3,8 +3,10 @@ package com.KarteMeister.KMBackEnd.domein;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,13 +23,8 @@ public class Organiser {
     private String password;
     private double wallet;
     
-    @OneToMany
+    @OneToMany(mappedBy="organiser", fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
     private List<Attraction> AttractionList;
-    
-    public Collection<Attraction> getAttractionList() {
-        return AttractionList;
-    }
-    
     
     public long getId() {
 		return id;
@@ -90,6 +87,10 @@ public class Organiser {
 	public void setAttractionList(List<Attraction> attractionList) {
 		AttractionList = attractionList;
 	}
+	
+    public List<Attraction> getAttractionList() {
+        return AttractionList;
+    }
 	
  
 }
