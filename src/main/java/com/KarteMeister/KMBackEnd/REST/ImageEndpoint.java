@@ -24,7 +24,7 @@ public class ImageEndpoint {
 	
 	@PostMapping("image")
 	public void postImage(@RequestParam("file") MultipartFile file) throws IOException {
-		System.out.println("Afbeelding knallen joe");
+		System.out.println("Post image");
 		Image i = new Image();
 		i.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
 		

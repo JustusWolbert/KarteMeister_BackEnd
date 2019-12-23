@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.KarteMeister.KMBackEnd.controller.AttractionService;
 import com.KarteMeister.KMBackEnd.controller.EventService;
+import com.KarteMeister.KMBackEnd.controller.ProfileService;
 import com.KarteMeister.KMBackEnd.controller.PurchaseService;
-import com.KarteMeister.KMBackEnd.controller.VisitorService;
 import com.KarteMeister.KMBackEnd.domein.Attraction;
 import com.KarteMeister.KMBackEnd.domein.Event;
 import com.KarteMeister.KMBackEnd.domein.Organiser;
@@ -26,7 +26,7 @@ public class FakeEndpoint {
 	@Autowired
 	EventService es;
 	@Autowired
-	VisitorService vs;
+	ProfileService profs;
 	@Autowired
 	PurchaseService ps;
 	
@@ -64,7 +64,7 @@ public class FakeEndpoint {
 		o.setName("K. Niebal");
 		o.setPassword("YYXXYY");
 		o.setWallet(0);
-		as.postOrganiserEntry(o);
+		profs.postOrganiserEntry(o);
 		
 		System.out.println("received:");
 		Attraction attr1 = new Attraction();
@@ -80,7 +80,7 @@ public class FakeEndpoint {
 		attr2.setCategory("Minimal");
 		attr2.setDescription("Min going to the max.");
 		
-		Organiser oa = as.getOrganiserEntry("K. Niebal");
+		Organiser oa = profs.getOrganiserEntry("K. Niebal");
 		as.postAttractionEntry(attr1, oa.getId());
 		as.postAttractionEntry(attr2, oa.getId());
 		
@@ -99,7 +99,7 @@ public class FakeEndpoint {
 		e.setPriceConsumption(2.60);
 		e.setAttraction(attr1);
 		Attraction a = as.getAttractionEntry("Steve Reich");
-		es.postEventEntry(e,a.getId());							//hier gaatie mis
+		as.postEventEntry(e,a.getId());							//hier gaatie mis
 		
 		Visitor v = new Visitor();
 		//v.setId(4);
@@ -107,15 +107,15 @@ public class FakeEndpoint {
 		v.setPassword("wachtwoord1");
 		v.setVisitorName("FritsMeister");
 		v.setWallet(100.25);
-		vs.postVisitorEntry(v);
+		profs.postVisitorEntry(v);
 		
 		Ticket t = new Ticket();
 		//t.setId(25);
 		t.setIncludeConsumption(true);
 		t.setIncludeLocker(true);
 		t.setAmountConsumption(25);
-		Event ea = es.getEventEntry("Feestteam");
-		Visitor va = vs.getVisitorEntry("FritsMeister");
+		Event ea = as.getEventEntry("Feestteam");
+		Visitor va = profs.getVisitorEntry("FritsMeister");
 		ps.PostTicketEntry(t, ea.getId(), va.getId());
 		
 	}

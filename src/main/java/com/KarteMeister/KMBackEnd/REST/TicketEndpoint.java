@@ -27,7 +27,7 @@ public class TicketEndpoint {
 	
 	@PostMapping("{VisitorId}/{EventId}/ticket")
 	public void xmlPoster(@RequestBody Ticket tckt,@PathVariable("EventId") long EventId,@PathVariable("VisitorId") long VisitorId){
-		System.out.println("received:");
+		System.out.println("Received ticket: "+tckt.getId());
 		ps.PostTicketEntry(tckt, EventId, VisitorId);
 	}
 	

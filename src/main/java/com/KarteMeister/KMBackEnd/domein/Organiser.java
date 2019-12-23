@@ -3,6 +3,7 @@ package com.KarteMeister.KMBackEnd.domein;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class Organiser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
+    @Column(unique = true)
     private String loginName;
     private String password;
     private double wallet;

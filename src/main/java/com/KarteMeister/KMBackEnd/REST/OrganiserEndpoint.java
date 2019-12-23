@@ -8,24 +8,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.KarteMeister.KMBackEnd.controller.ProfileService;
-import com.KarteMeister.KMBackEnd.controller.PurchaseService;
+import com.KarteMeister.KMBackEnd.domein.Organiser;
 import com.KarteMeister.KMBackEnd.domein.Visitor;
 
 @RestController
-public class VisitorEndpoint {
-	
+public class OrganiserEndpoint {
+
 	@Autowired
 	ProfileService profs;
 	
-	@GetMapping("visitor/{visitorName}")
-	public Visitor xmlGetter(@PathVariable("visitorName") String visitorName) {
-		profs.getVisitorEntry(visitorName);
+	@GetMapping("organiser/{organiserName}")
+	public Visitor xmlGetter(@PathVariable("organiserName") String organiserName) {
+		profs.getVisitorEntry(organiserName);
 		return null;
 	}
 	
-	@PostMapping("visitor")
-	public void xmlPoster(@RequestBody Visitor vstr) {
-		System.out.println("Received: "+vstr.getVisitorName());
-		profs.postVisitorEntry(vstr);
+	@PostMapping("organiser")
+	public void xmlPoster(@RequestBody Organiser org) {
+		System.out.println("Received: "+org.getName());
+		profs.postOrganiserEntry(org);
 	}
 }

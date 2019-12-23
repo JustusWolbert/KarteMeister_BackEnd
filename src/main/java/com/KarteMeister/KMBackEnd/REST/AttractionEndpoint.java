@@ -14,6 +14,7 @@ import com.KarteMeister.KMBackEnd.domein.Attraction;
 
 @RestController
 public class AttractionEndpoint {
+	
 	@Autowired
 	AttractionService as;
 	
@@ -26,7 +27,7 @@ public class AttractionEndpoint {
 	
 	@PostMapping("attraction")
 	public void xmlPoster(@RequestBody Attraction attr){
-		System.out.println("received:");
+		System.out.println("Received: "+ attr.getAttractionName());
 
 		//as.postAttractionEntry(attr); 	needs organiser ID
 	}
