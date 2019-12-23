@@ -15,8 +15,9 @@ public class ProfileService {
 	@Autowired
 	OrganiserRepository or;
 	
-	public void postVisitorEntry(Visitor vtr) {
+	public Visitor postVisitorEntry(Visitor vtr) {
 		vr.save(vtr);
+		return vtr;
 	}
 	
 	public Visitor getVisitorEntry(String VisitorName) {
@@ -24,8 +25,9 @@ public class ProfileService {
 		return vtr;
 	}
 	
-	public void postOrganiserEntry(Organiser org) {
+	public Organiser postOrganiserEntry(Organiser org) {
 		or.save(org);
+		return org;
 	}
 	
 	public Organiser getOrganiserEntry(String organiserName) {

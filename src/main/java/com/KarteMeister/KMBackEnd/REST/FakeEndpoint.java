@@ -57,7 +57,7 @@ public class FakeEndpoint {
 	}
 	
 	@PostMapping("stubPost")
-	public void stubPoster(Attraction attr){
+	public void stubPoster(){
 		Organiser o = new Organiser();
 		//o.setId(10);
 		o.setLoginName("XXYYXX");

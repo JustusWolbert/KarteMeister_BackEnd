@@ -25,7 +25,7 @@ public class PurchaseService {
 		return tckt;
 	}
 	
-	public void PostTicketEntry(Ticket tckt, long EveId, long VisId) {
+	public Ticket PostTicketEntry(Ticket tckt, long EveId, long VisId) {
 		System.out.println(tckt.getId() + EveId + VisId);
 		Event ev = er.findById(EveId).get();
 		System.out.println(ev.getId());
@@ -42,6 +42,7 @@ public class PurchaseService {
 		System.out.println(tckt.getTicketPrice());
 		
 		tr.save(tckt);
+		return tckt;
 	}
 	
 	
