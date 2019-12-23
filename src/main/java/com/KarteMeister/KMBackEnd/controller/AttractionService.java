@@ -24,10 +24,11 @@ public class AttractionService {
 	ImageRepository ir;
 	
 	
-	public void postAttractionEntry(Attraction attr, long id) {
+	public Attraction postAttractionEntry(Attraction attr, long id) {
 		Organiser o = or.findById(id).get();
 		attr.setOrganiser(o);
 		ar.save(attr);
+		return attr;
 	}
 	
 	public Attraction getAttractionEntry(String artistName) {
@@ -47,10 +48,11 @@ public class AttractionService {
 		ar.deleteById(attr.getId());
 	}
 	
-	public void postEventEntry(Event ev, long id) {
+	public Event postEventEntry(Event ev, long id) {
 		Attraction attr = ar.findById(id).get();
 		ev.setAttraction(attr);
 		er.save(ev);
+		return ev;
 	}
 	
 	public Event getEventEntry(String eventName) {
