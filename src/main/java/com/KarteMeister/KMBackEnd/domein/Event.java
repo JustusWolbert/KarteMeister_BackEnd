@@ -124,6 +124,10 @@ public class Event {
 	public void setAttraction(Attraction attraction) {
 		this.attraction = attraction;
 	}
+	public void sellTicket() {
+		this.amountTicket -= 1;
+		
+	}
 	
 	
 	

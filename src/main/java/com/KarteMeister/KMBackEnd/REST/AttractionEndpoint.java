@@ -1,8 +1,5 @@
 package com.KarteMeister.KMBackEnd.REST;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.KarteMeister.KMBackEnd.controller.AttractionService;
 import com.KarteMeister.KMBackEnd.domein.Attraction;
-import com.KarteMeister.KMBackEnd.domein.Event;
 
 @RestController
 public class AttractionEndpoint {
@@ -32,7 +28,7 @@ public class AttractionEndpoint {
 	public void xmlPoster(@RequestBody Attraction attr){
 		System.out.println("received:");
 
-		as.postAttractionEntry(attr);
+		//as.postAttractionEntry(attr); 	needs organiser ID
 	}
 	
 	@PutMapping("attraction/change/{firstValue}/{secondValue}/")

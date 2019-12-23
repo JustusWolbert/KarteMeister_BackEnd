@@ -17,7 +17,7 @@ public class Organiser {
     private String name;
     private String loginName;
     private String password;
-    private int wallet;
+    private double wallet;
     
     @OneToMany
     private List<Attraction> AttractionList;
@@ -73,13 +73,13 @@ public class Organiser {
 
 
 
-	public int getWallet() {
+	public double getWallet() {
 		return wallet;
 	}
 
 
 
-	public void setWallet(int wallet) {
+	public void setWallet(double wallet) {
 		this.wallet = wallet;
 	}
 
