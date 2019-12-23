@@ -42,15 +42,18 @@ public class KarteMeisterInitializer {
 //		attractionService.postAttractionEntry(attr1, oa.getId());
 //		attractionService.postAttractionEntry(attr2, oa.getId());
 		
-		Event event1 = createEvent("Feestteam","Leiden","B&C","03-10 17:00","Feestje in de bieb",200,1.50,true,true,
+		Event event1 = createEvent("Feestteam","Leiden","B&C","03-10 17:00","Feestje in de bieb",200,12.50,true,true,
 									1,2.60,	attractionService.getAttractionEntry("Steve Reich").getId());						//hier gaatie mis
 		
-		Visitor v = createVisitor("Fritsje van Sonnewende","FritsMeister","wachtwoord1",100.25);
+		Visitor vstr1 = createVisitor("Fritsje van Sonnewende","FritsMeister","wachtwoord1",100.25);
 		
-		Ticket t = createTicket(true, true, 25, 
+		Ticket tick1 = createTicket(true, true, 25, 
 				attractionService.getEventEntry("Feestteam").getId(),
 				profileService.getVisitorEntry("FritsMeister").getId());
 				
+		Ticket tick2 = createTicket(true, false, 10, 
+				attractionService.getEventEntry("Feestteam").getId(),
+				profileService.getVisitorEntry("FritsMeister").getId());
 
 				
 

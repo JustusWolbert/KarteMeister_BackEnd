@@ -25,12 +25,16 @@ public class AttractionEndpoint {
 		return attr;
 	}
 	
-	@PostMapping("attraction")
-	public void xmlPoster(@RequestBody Attraction attr){
+	@PostMapping("{organiserId}/attraction")
+	public void xmlPoster(@RequestBody Attraction attr, @PathVariable("organiserId") long id){
 		System.out.println("Received: "+ attr.getAttractionName());
 
-		//as.postAttractionEntry(attr); 	needs organiser ID
+		as.postAttractionEntry(attr, id); 	//needs organiser ID
 	}
+	
+	
+	
+	
 	
 	@PutMapping("attraction/change/{firstValue}/{secondValue}/")
 	public void xmlPut(@PathVariable("firstValue") String firstValue, @PathVariable("secondValue") String secondValue){

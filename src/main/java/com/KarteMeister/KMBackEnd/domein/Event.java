@@ -35,7 +35,7 @@ public class Event {
 	@OneToMany(mappedBy="event")
 	private List<Ticket> ticketList;
 	
-	@ManyToOne//(fetch = FetchType.LAZY)
+	@ManyToOne//(fetch = FetchType.EAGER)
 	@JoinColumn(name="attraction_id", nullable=false)
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private Attraction attraction;

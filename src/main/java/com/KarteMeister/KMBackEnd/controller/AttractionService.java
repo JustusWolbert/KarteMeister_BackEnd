@@ -1,5 +1,7 @@
 package com.KarteMeister.KMBackEnd.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +30,11 @@ public class AttractionService {
 		Organiser o = or.findById(id).get();
 		attr.setOrganiser(o);
 		ar.save(attr);
+		
+		List<Attraction> attractionList = o.getAttractionList();
+		attractionList.add(attr);
+		o.setAttractionList(attractionList);
+		or.save(o);
 		return attr;
 	}
 	
@@ -52,6 +59,12 @@ public class AttractionService {
 		Attraction attr = ar.findById(id).get();
 		ev.setAttraction(attr);
 		er.save(ev);
+		
+		List<Event> eventList = attr.getEventList();
+		eventList.add(ev);
+		attr.setEventList(eventList);
+		ar.save(attr);
+		
 		return ev;
 	}
 	

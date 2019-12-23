@@ -19,15 +19,15 @@ public class EventEndpoint {
 	AttractionRepository ar;
 
 	
-	@GetMapping("event/{firstValue}/")
-	public Event xmlGetter(@PathVariable("firstValue") String firstValue) {
+	@GetMapping("event/{eventName}/")
+	public Event xmlGetter(@PathVariable("eventName") String eventName) {
 		System.out.println("send");
-		Event ev = as.getEventEntry(firstValue);
+		Event ev = as.getEventEntry(eventName);
 		return ev;
 	}
 	
-	@PostMapping("{firstValue}/event")
-	public void xmlPoster(@RequestBody Event ev, @PathVariable("firstValue") long id) {
+	@PostMapping("{attractionId}/event")
+	public void xmlPoster(@RequestBody Event ev, @PathVariable("attractionId") long id) {
 		System.out.println("Reveived: "+ev.getEventName());
 		as.postEventEntry(ev, id);
 	}
