@@ -14,7 +14,7 @@ public class Visitor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private int wallet;
+    private double wallet;
     private String visitorName;
     private String loginName;
     private String password;
@@ -30,11 +30,11 @@ public class Visitor {
 		this.id = id;
 	}
 
-	public int getWallet() {
+	public double getWallet() {
 		return wallet;
 	}
 
-	public void setWallet(int wallet) {
+	public void setWallet(double wallet) {
 		this.wallet = wallet;
 	}
 

@@ -6,8 +6,11 @@ import java.util.List;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
@@ -25,7 +28,11 @@ public class Ticket {
     @ManyToOne
     private Event event;
     @ManyToOne
+    @JoinColumn(name="visitor_id", nullable = false)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Visitor visitor;
+    
+   
     
     public double addLocker(){
         if(this.includeLocker == true) {
@@ -87,13 +94,21 @@ public class Ticket {
 	}
 
 
-//	public Event getEvent() {
-//		return event;
-//	}
+	public Event getEvent() {
+		return event;
+	}
 
-//	public void setEvent(Event event) {
-//		this.event = event;
-//	}
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+
+	public Visitor getVisitor() {
+		return visitor;
+	}
+
+	public void setVisitor(Visitor visitor) {
+		this.visitor = visitor;
+	}
     
     
     

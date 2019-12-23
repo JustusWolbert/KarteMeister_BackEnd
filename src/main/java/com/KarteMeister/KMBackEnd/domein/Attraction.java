@@ -7,8 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Attraction {
@@ -26,8 +29,10 @@ public class Attraction {
 	private List<Event> eventList;
 	
 	@ManyToOne
+	@JoinColumn(name="organiser_id", nullable = false)
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private Organiser organiser;
-
+	
 	public long getId() {
 		return id;
 	}

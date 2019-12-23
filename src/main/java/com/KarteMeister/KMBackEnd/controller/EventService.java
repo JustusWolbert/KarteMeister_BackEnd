@@ -26,6 +26,12 @@ public class EventService {
 
 	}
 	
+	public void setAmountOfTickets(long id) {
+		Event ev = er.findById(id).get();
+		ev.sellTicket();
+		er.save(ev);
+	}
+	
 
 }
 
