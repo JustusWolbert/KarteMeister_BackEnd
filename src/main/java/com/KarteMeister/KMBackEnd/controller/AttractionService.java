@@ -47,15 +47,22 @@ public class AttractionService {
 		ar.deleteById(attr.getId());
 	}
 	
-	public void postOrganiserEntry(Organiser orga) {
-		or.save(orga);
+	public void postEventEntry(Event ev, long id) {
+		Attraction attr = ar.findById(id).get();
+		ev.setAttraction(attr);
+		er.save(ev);
 	}
-
-	public Organiser getOrganiserEntry(String string) {
-		Organiser o = or.findByName(string);
-		return o;
+	
+	public Event getEventEntry(String eventName) {
+		Event ev = er.findByEventName(eventName);
+		return ev;
 	}
-
+	
+	public void setAmountOfTickets(long id) {
+		Event ev = er.findById(id).get();
+		ev.sellTicket();
+		er.save(ev);
+	}
 
 
 }

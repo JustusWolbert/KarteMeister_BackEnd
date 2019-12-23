@@ -3,13 +3,17 @@ package com.KarteMeister.KMBackEnd.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.KarteMeister.KMBackEnd.domein.Organiser;
 import com.KarteMeister.KMBackEnd.domein.Visitor;
 
+
 @Service
-public class VisitorService {
+public class ProfileService {
 	
 	@Autowired
 	VisitorRepository vr;
+	@Autowired
+	OrganiserRepository or;
 	
 	public void postVisitorEntry(Visitor vtr) {
 		vr.save(vtr);
@@ -20,6 +24,14 @@ public class VisitorService {
 		return vtr;
 	}
 	
+	public void postOrganiserEntry(Organiser org) {
+		or.save(org);
+	}
+	
+	public Organiser getOrganiserEntry(String organiserName) {
+		Organiser org = or.findByName(organiserName);
+		return org;
+	}
 	
 	
 	

@@ -12,6 +12,8 @@ import com.KarteMeister.KMBackEnd.domein.Organiser;
 public interface OrganiserRepository extends CrudRepository<Organiser, Long> {
 
 	Organiser findByName(String string);
+	
+
 
 	}
 	

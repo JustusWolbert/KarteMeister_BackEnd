@@ -14,23 +14,7 @@ public class EventService {
 	@Autowired
 	AttractionRepository ar;
 	
-	public void postEventEntry(Event ev, long id) {
-		Attraction attr = ar.findById(id).get();
-		ev.setAttraction(attr);
-		er.save(ev);
-	}
-	
-	public Event getEventEntry(String eventName) {
-		Event ev = er.findByEventName(eventName);
-		return ev;
 
-	}
-	
-	public void setAmountOfTickets(long id) {
-		Event ev = er.findById(id).get();
-		ev.sellTicket();
-		er.save(ev);
-	}
 	
 
 }

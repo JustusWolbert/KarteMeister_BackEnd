@@ -2,6 +2,7 @@ package com.KarteMeister.KMBackEnd.domein;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class Visitor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private double wallet;
+    @Column(unique = true)
     private String visitorName;
     private String loginName;
     private String password;
