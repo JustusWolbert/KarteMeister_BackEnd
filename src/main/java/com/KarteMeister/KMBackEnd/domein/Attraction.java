@@ -13,9 +13,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 
 @Entity
+
 public class Attraction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,12 +33,16 @@ public class Attraction {
 	
 	private String description;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy="attraction", fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@JsonIgnoreProperties(value = "eventList")
 	private List<Event> eventList;
 	
 	@ManyToOne
 	@JoinColumn(name="organiser_id", nullable = false)
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	
+	@JsonManagedReference
 	private Organiser organiser;
 	
 	public long getId() {

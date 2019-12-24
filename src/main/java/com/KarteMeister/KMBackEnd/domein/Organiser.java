@@ -12,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Organiser {
 	@Id
@@ -24,7 +27,9 @@ public class Organiser {
     private double wallet;
     
     @OneToMany(mappedBy="organiser", fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
-    private List<Attraction> AttractionList;
+    @JsonBackReference
+    @JsonIgnoreProperties(value = "attractionList")
+    private List<Attraction> attractionList;
     
     public long getId() {
 		return id;
@@ -85,11 +90,11 @@ public class Organiser {
 
 
 	public void setAttractionList(List<Attraction> attractionList) {
-		AttractionList = attractionList;
+		attractionList = attractionList;
 	}
 	
     public List<Attraction> getAttractionList() {
-        return AttractionList;
+        return attractionList;
     }
 	
  
