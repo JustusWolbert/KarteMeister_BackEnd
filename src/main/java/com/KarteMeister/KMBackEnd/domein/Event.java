@@ -2,6 +2,7 @@ package com.KarteMeister.KMBackEnd.domein;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -32,12 +35,14 @@ public class Event {
 	private double priceLocker;
 	private double priceConsumption;
 	
-	@OneToMany(mappedBy="event")
+	@OneToMany(mappedBy="event", cascade=CascadeType.PERSIST)
+	@JsonIgnoreProperties(value = "ticketList")
 	private List<Ticket> ticketList;
 	
 	@ManyToOne//(fetch = FetchType.EAGER)
 	@JoinColumn(name="attraction_id", nullable=false)
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@JsonManagedReference
 	private Attraction attraction;
 	
 	public long getId() {

@@ -31,10 +31,10 @@ public class AttractionService {
 		attr.setOrganiser(o);
 		ar.save(attr);
 		
-		List<Attraction> attractionList = o.getAttractionList();
-		attractionList.add(attr);
-		o.setAttractionList(attractionList);
-		or.save(o);
+//		List<Attraction> attractionList = o.getAttractionList();
+//		attractionList.add(attr);
+//		o.setAttractionList(attractionList);
+//		or.save(o);
 		return attr;
 	}
 	
@@ -43,6 +43,15 @@ public class AttractionService {
 		return attr;
 	}
 	
+	public List<Attraction> findAll(){
+		List<Attraction> attrList = ar.findAll();
+		return attrList;
+	}
+	
+	public List<Event> getAllEvents(){
+		List<Event> eventList = er.findAll();
+		return eventList;
+	}
 	
 	public void setCategoryForAttraction(String category, String artistName) {
 		Attraction attr = ar.findByArtistName(artistName);
@@ -60,11 +69,10 @@ public class AttractionService {
 		ev.setAttraction(attr);
 		er.save(ev);
 		
-		List<Event> eventList = attr.getEventList();
-		eventList.add(ev);
-		attr.setEventList(eventList);
-		ar.save(attr);
-		
+//		List<Event> eventList = attr.getEventList();
+//		eventList.add(ev);
+//		attr.setEventList(eventList);
+//		ar.save(attr);
 		return ev;
 	}
 	
@@ -78,6 +86,8 @@ public class AttractionService {
 		ev.sellTicket();
 		er.save(ev);
 	}
+
+	
 
 
 }

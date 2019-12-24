@@ -1,5 +1,8 @@
 package com.KarteMeister.KMBackEnd.REST;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +35,12 @@ public class AttractionEndpoint {
 		as.postAttractionEntry(attr, id); 	//needs organiser ID
 	}
 	
+	@GetMapping("attraction/all") 
+	public List<Attraction> xmlGetAll(){
+		System.out.println("send all attractions");
+		List<Attraction> attrList = as.findAll();
+		return attrList;
+	}
 	
 	
 	
