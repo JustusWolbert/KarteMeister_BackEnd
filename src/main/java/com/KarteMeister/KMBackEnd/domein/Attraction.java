@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 
 @Entity
-
 public class Attraction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,18 +29,16 @@ public class Attraction {
 	private String attractionName;
 	private String artistName;
 	private String category;
-	
 	private String description;
 	
 	@JsonBackReference
-	@OneToMany(mappedBy="attraction", fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@OneToMany(mappedBy="attraction", orphanRemoval=true /*, cascade=CascadeType.ALL*/)
 	@JsonIgnoreProperties(value = "eventList")
 	private List<Event> eventList;
 	
 	@ManyToOne
 	@JoinColumn(name="organiser_id", nullable = false)
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	
 	@JsonManagedReference
 	private Organiser organiser;
 	

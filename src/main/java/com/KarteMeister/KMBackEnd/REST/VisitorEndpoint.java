@@ -17,10 +17,11 @@ public class VisitorEndpoint {
 	@Autowired
 	ProfileService profs;
 	
-	@GetMapping("visitor/{visitorName}")
+	@GetMapping("visitor/{visitorName}/")
 	public Visitor xmlGetter(@PathVariable("visitorName") String visitorName) {
-		profs.getVisitorEntry(visitorName);
-		return null;
+		Visitor v = profs.getVisitorEntry(visitorName);
+		System.out.println(v.getVisitorName());
+		return v;
 	}
 	
 	@PostMapping("visitor")

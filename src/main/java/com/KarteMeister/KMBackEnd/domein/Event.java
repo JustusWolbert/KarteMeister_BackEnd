@@ -35,7 +35,7 @@ public class Event {
 	private double priceLocker;
 	private double priceConsumption;
 	
-	@OneToMany(mappedBy="event", cascade=CascadeType.PERSIST)
+	@OneToMany(mappedBy="event", orphanRemoval=true, cascade=CascadeType.ALL)
 	@JsonIgnoreProperties(value = "ticketList")
 	private List<Ticket> ticketList;
 	
