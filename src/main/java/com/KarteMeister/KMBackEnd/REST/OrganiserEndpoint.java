@@ -18,9 +18,9 @@ public class OrganiserEndpoint {
 	ProfileService profs;
 	
 	@GetMapping("organiser/{organiserName}")
-	public Visitor xmlGetter(@PathVariable("organiserName") String organiserName) {
-		profs.getVisitorEntry(organiserName);
-		return null;
+	public Organiser xmlGetter(@PathVariable("organiserName") String organiserName) {
+		Organiser org = profs.getOrganiserEntry(organiserName);
+		return org;
 	}
 	
 	@PostMapping("organiser")
@@ -28,4 +28,6 @@ public class OrganiserEndpoint {
 		System.out.println("Received: "+org.getName());
 		profs.postOrganiserEntry(org);
 	}
+	
+	
 }

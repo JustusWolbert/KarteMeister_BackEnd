@@ -26,7 +26,8 @@ public class Organiser {
     private String password;
     private double wallet;
     
-    @OneToMany(mappedBy="organiser", fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
+    @OneToMany(mappedBy="organiser", fetch = FetchType.EAGER, 
+    			cascade=CascadeType.ALL, orphanRemoval=true)
     @JsonBackReference
     @JsonIgnoreProperties(value = "attractionList")
     private List<Attraction> attractionList;

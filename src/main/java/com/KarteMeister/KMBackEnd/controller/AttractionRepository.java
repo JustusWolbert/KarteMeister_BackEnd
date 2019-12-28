@@ -13,12 +13,14 @@ import com.KarteMeister.KMBackEnd.domein.Attraction;
 @Component
 public interface AttractionRepository extends CrudRepository<Attraction, Long>{
 	
-	@Override
-	@Transactional
 	public List<Attraction> findAll();
 	
 	public Attraction findByArtistName(String artistName);
 	
+	@Modifying
+	@Transactional(readOnly=false)
+	@Query("DELETE FROM Attraction att WHERE att.id = ?1")
+	public void removeById(long id);
 	
 	
 	/*
@@ -26,5 +28,7 @@ public interface AttractionRepository extends CrudRepository<Attraction, Long>{
 	@Query("update Attraction att set att.location = ?1 where u.eventName = ?2")
 	public int setLocationForEvent(String location, String eventName);
 	*/
+	
+
 
 }

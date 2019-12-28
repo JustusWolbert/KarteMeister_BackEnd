@@ -12,6 +12,7 @@ import com.KarteMeister.KMBackEnd.controller.PurchaseService;
 import com.KarteMeister.KMBackEnd.domein.Attraction;
 import com.KarteMeister.KMBackEnd.domein.Event;
 import com.KarteMeister.KMBackEnd.domein.Organiser;
+import com.KarteMeister.KMBackEnd.domein.SalesAdmin;
 import com.KarteMeister.KMBackEnd.domein.Ticket;
 import com.KarteMeister.KMBackEnd.domein.Visitor;
 
@@ -32,7 +33,7 @@ public class KarteMeisterInitializer {
 	
 	@PostConstruct
 	public void init() {
-		
+		SalesAdmin sa = createSalesAdmin(0);
 		Organiser org1 = createOrganiser("Frits", "Spits","Mits", 100);
 		
 		Attraction attr1 = createAttraction("Beat Bumpers", "DJ Spring and Boot","Techno","Stamp stamp stamp!",profileService.getOrganiserEntry(org1.getName()).getId());
@@ -43,8 +44,12 @@ public class KarteMeisterInitializer {
 //		attractionService.postAttractionEntry(attr2, oa.getId());
 		
 		Event event1 = createEvent("Feestteam","Leiden","B&C","03-10 17:00","Feestje in de bieb",200,12.50,true,true,
-									1,2.60,	attractionService.getAttractionEntry("Steve Reich").getId());						//hier gaatie mis
-		
+									1,2.60,	attractionService.getAttractionEntry("Steve Reich").getId());
+		Event event2 = createEvent("Party crew","Utrecht","B&C","03-10 17:00","Biebje op het feest",150,11.50,true,false,
+				1,2.60,	attractionService.getAttractionEntry("Steve Reich").getId());
+		Event event3 = createEvent("Nikki en Nakki","Amsterdam","Leidsche Plein","03-10 17:00","Leidsche Plein op z'n kop joee",200,55.50,false,true,
+				1,2.60,	attractionService.getAttractionEntry("DJ Spring and Boot").getId());
+
 		Visitor vstr1 = createVisitor("Fritsje van Sonnewende","FritsMeister","wachtwoord1",100.25);
 		
 		Ticket tick1 = createTicket(true, true, 25, 
@@ -55,9 +60,14 @@ public class KarteMeisterInitializer {
 				attractionService.getEventEntry("Feestteam").getId(),
 				profileService.getVisitorEntry("FritsMeister").getId());
 
-				
-
 			
+	}
+	
+	private SalesAdmin createSalesAdmin(double wallet) {
+		SalesAdmin as = new SalesAdmin();
+		as.setWallet(wallet);
+		as.setName();
+		return profileService.postAdmin(as);
 	}
 		
 	private Organiser createOrganiser(String loginName, String name, String password, double wallet) {
@@ -67,7 +77,6 @@ public class KarteMeisterInitializer {
 		o.setPassword(password);
 		o.setWallet(wallet);
 		return profileService.postOrganiserEntry(o);
-		
 	}
 		
 	private Attraction createAttraction(String attractionName, String artistName, String category, String description, long id) {

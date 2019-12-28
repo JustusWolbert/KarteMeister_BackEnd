@@ -25,68 +25,69 @@ public class AttractionService {
 	@Autowired
 	ImageRepository ir;
 	
-	
-	public Attraction postAttractionEntry(Attraction attr, long id) {
+	/*
+	 * Attraction entries 
+	 */
+	public Attraction postAttractionEntry(Attraction attr, long id) {	//post attraction
 		Organiser o = or.findById(id).get();
 		attr.setOrganiser(o);
 		ar.save(attr);
-		
-//		List<Attraction> attractionList = o.getAttractionList();
-//		attractionList.add(attr);
-//		o.setAttractionList(attractionList);
-//		or.save(o);
 		return attr;
 	}
 	
-	public Attraction getAttractionEntry(String artistName) {
+	public Attraction getAttractionEntry(String artistName) {			//get attraction
 		Attraction attr = ar.findByArtistName(artistName);
 		return attr;
 	}
 	
-	public List<Attraction> findAll(){
+	public List<Attraction> findAll(){									//get all attraction
 		List<Attraction> attrList = ar.findAll();
 		return attrList;
 	}
 	
-	public List<Event> getAllEvents(){
-		List<Event> eventList = er.findAll();
-		return eventList;
-	}
-	
-	public void setCategoryForAttraction(String category, String artistName) {
+	public void setCategoryForAttraction(String artistName, String category) { //put caterory for attraction
 		Attraction attr = ar.findByArtistName(artistName);
 		attr.setCategory(category);
 		ar.save(attr);
 	}
 	
-	public void delete(String artistName) {
-		Attraction attr = ar.findByArtistName(artistName);
-		ar.deleteById(attr.getId());
+	public void removeAttraction(String artistName) {					//delete attraction 
+		ar.deleteById(ar.findByArtistName(artistName).getId());			//removes children
+		ar.removeById(ar.findByArtistName(artistName).getId());			//removes attraction	
 	}
 	
-	public Event postEventEntry(Event ev, long id) {
+	
+	/*
+	 * Event entries 
+	 */
+	public List<Event> getAllEvents(){					//get all events
+		List<Event> eventList = er.findAll();
+		return eventList;
+	}
+	
+	public Event postEventEntry(Event ev, long id) {	//post event
 		Attraction attr = ar.findById(id).get();
 		ev.setAttraction(attr);
 		er.save(ev);
-		
-//		List<Event> eventList = attr.getEventList();
-//		eventList.add(ev);
-//		attr.setEventList(eventList);
-//		ar.save(attr);
 		return ev;
 	}
 	
-	public Event getEventEntry(String eventName) {
+	public Event getEventEntry(String eventName) {		//get event
 		Event ev = er.findByEventName(eventName);
 		return ev;
 	}
 	
-	public void setAmountOfTickets(long id) {
+	public void setAmountOfTickets(long id) {			//set event
 		Event ev = er.findById(id).get();
 		ev.sellTicket();
 		er.save(ev);
 	}
-
+	
+	public void deleteEvent(String eventName, String venue) {
+		er.deleteById(er.findByEventNameAndVenue(eventName, venue).getId());			//removes children
+		//er.removeById(er.findByEventNameAndVenue(eventName, venue).getId());			//removes attraction
+	}
+	
 	
 
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.KarteMeister.KMBackEnd.controller.AttractionService;
 import com.KarteMeister.KMBackEnd.domein.Attraction;
+import com.KarteMeister.KMBackEnd.domein.Event;
 
 @RestController
 public class AttractionEndpoint {
@@ -21,10 +22,17 @@ public class AttractionEndpoint {
 	@Autowired
 	AttractionService as;
 	
-	@GetMapping("attraction/{firstValue}/")
-	public Attraction xmlGetter(@PathVariable("firstValue") String firstValue){
+	@GetMapping("attraction/{artistName}/")
+	public Attraction xmlGetter(@PathVariable("artistName") String artistName){
 		System.out.println("send");
-		Attraction attr = as.getAttractionEntry(firstValue);
+		Attraction attr = as.getAttractionEntry(artistName);
+		List<Event> eventList = new ArrayList();
+		for(Event e : attr.getEventList()) {
+			Event ev = new Event();
+			ev.setId(e.getId());
+			eventList.add(ev);
+		}
+		attr.setEventList(eventList);	
 		return attr;
 	}
 	
@@ -44,16 +52,15 @@ public class AttractionEndpoint {
 	
 	
 	
-	
-	@PutMapping("attraction/change/{firstValue}/{secondValue}/")
-	public void xmlPut(@PathVariable("firstValue") String firstValue, @PathVariable("secondValue") String secondValue){
-		as.setCategoryForAttraction(firstValue, secondValue);
+	@PutMapping("attraction/change/{artistName}/{category}/")
+	public void xmlPut(@PathVariable("artistName") String artistName, @PathVariable("category") String category){
+		as.setCategoryForAttraction( artistName, category);
 		
 	}
 	
-	@DeleteMapping("attraction/delete/{firstValue}/")
-	public void xmlDelete(@PathVariable("firstValue") String firstValue){
-		as.delete(firstValue);
+	@DeleteMapping("attraction/delete/{artistName}/")
+	public void xmlDelete(@PathVariable("artistName") String artistName){
+		as.removeAttraction(artistName);
 	}
 	
 

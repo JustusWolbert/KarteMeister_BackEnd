@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -28,10 +29,13 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name="event_id", nullable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonManagedReference
     private Event event;
+    
     @ManyToOne
     @JoinColumn(name="visitor_id", nullable = false)
-    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonManagedReference
     private Visitor visitor;
     
    

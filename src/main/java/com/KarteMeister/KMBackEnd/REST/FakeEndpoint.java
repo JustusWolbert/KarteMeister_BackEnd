@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.KarteMeister.KMBackEnd.controller.AttractionService;
-import com.KarteMeister.KMBackEnd.controller.EventService;
 import com.KarteMeister.KMBackEnd.controller.ProfileService;
 import com.KarteMeister.KMBackEnd.controller.PurchaseService;
 import com.KarteMeister.KMBackEnd.domein.Attraction;
@@ -23,8 +22,6 @@ public class FakeEndpoint {
 	
 	@Autowired
 	AttractionService as;
-	@Autowired
-	EventService es;
 	@Autowired
 	ProfileService profs;
 	@Autowired
@@ -116,6 +113,7 @@ public class FakeEndpoint {
 		t.setAmountConsumption(25);
 		Event ea = as.getEventEntry("Feestteam");
 		Visitor va = profs.getVisitorEntry("FritsMeister");
+		
 		ps.PostTicketEntry(t, ea.getId(), va.getId());
 		
 	}

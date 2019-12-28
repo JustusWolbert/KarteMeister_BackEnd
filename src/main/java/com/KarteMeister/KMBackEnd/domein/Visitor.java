@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Visitor {
 
@@ -22,7 +24,8 @@ public class Visitor {
     private String password;
     
     @OneToMany(mappedBy="visitor")
-    private List<Ticket> ticketList;
+    @JsonIgnoreProperties(value = "ticketList")
+    private List<Ticket> ticketList;	
 
 	public long getId() {
 		return id;
