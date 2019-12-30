@@ -31,9 +31,9 @@ public class Attraction {
 	private String category;
 	private String description;
 	
-	@JsonBackReference
+	//@JsonBackReference
 	@OneToMany(mappedBy="attraction", orphanRemoval=true /*, cascade=CascadeType.ALL*/)
-	@JsonIgnoreProperties(value = "eventList")
+	//@JsonIgnoreProperties(value = "eventList")
 	private List<Event> eventList;
 	
 	@ManyToOne

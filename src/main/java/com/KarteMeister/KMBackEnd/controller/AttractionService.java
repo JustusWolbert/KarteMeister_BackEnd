@@ -28,8 +28,8 @@ public class AttractionService {
 	/*
 	 * Attraction entries 
 	 */
-	public Attraction postAttractionEntry(Attraction attr, long id) {	//post attraction
-		Organiser o = or.findById(id).get();
+	public Attraction postAttractionEntry(Attraction attr, long OrganiserId) {	//post attraction
+		Organiser o = or.findById(OrganiserId).get();
 		attr.setOrganiser(o);
 		ar.save(attr);
 		return attr;
@@ -65,6 +65,11 @@ public class AttractionService {
 		return eventList;
 	}
 	
+	public List<Event> getAllEventsByAttractionId(String artistName){
+		List<Event> eventList = er.findAllByAttractionId(getAttractionEntry(artistName).getId());
+		return eventList;
+	}
+	
 	public Event postEventEntry(Event ev, long id) {	//post event
 		Attraction attr = ar.findById(id).get();
 		ev.setAttraction(attr);
@@ -87,7 +92,8 @@ public class AttractionService {
 		er.deleteById(er.findByEventNameAndVenue(eventName, venue).getId());			//removes children
 		//er.removeById(er.findByEventNameAndVenue(eventName, venue).getId());			//removes attraction
 	}
-	
+
+		
 	
 
 

@@ -40,32 +40,37 @@ public class PurchaseService {
 		Organiser og = ev.getAttraction().getOrganiser();
 		SalesAdmin sad = sa.findByName("Admin");
 		
-		tckt.setVisitor(vs);
-		tckt.setEvent(ev);
-		tckt.setTicketPrice();
-		tckt.addConsumption(tckt.getAmountConsumption());
-		tckt.addLocker();
-		System.out.println("Ticket price: "+tckt.getTicketPrice());
-		
-		if( vs.getWallet() > tckt.getTicketPrice()) {
-			vs.setWallet(vs.getWallet()-tckt.getTicketPrice());
-			vr.save(vs);
+		if(ev.getAmountTicket() > 0) {
+			tckt.setVisitor(vs);
+			tckt.setEvent(ev);
+			tckt.setTicketPrice();
+			tckt.addConsumption(tckt.getAmountConsumption());
+			tckt.addLocker();
+			System.out.println("Ticket price: "+tckt.getTicketPrice());
 			
-			ev.sellTicket();
-			er.save(ev);
-			
-			double split = 0.9*tckt.getTicketPrice();
-			og.setWallet(og.getWallet()+split);
-			or.save(og);
-
-			sad.setWallet(sad.getWallet()+tckt.getTicketPrice()-split);
-			sa.save(sad);
-			
-			System.out.println(vs.getVisitorName()+" bought ticket "+tckt.getId());
-			tr.save(tckt);
-			return tckt;
+			if( vs.getWallet() > tckt.getTicketPrice()) {
+				vs.setWallet(vs.getWallet()-tckt.getTicketPrice());
+				vr.save(vs);
+				
+				ev.sellTicket();
+				er.save(ev);
+				
+				double split = 0.9*tckt.getTicketPrice();
+				og.setWallet(og.getWallet()+split);
+				or.save(og);
+	
+				sad.setWallet(sad.getWallet()+tckt.getTicketPrice()-split);
+				sa.save(sad);
+				
+				System.out.println(vs.getVisitorName()+" bought ticket "+tckt.getId());
+				tr.save(tckt);
+				return tckt;
+			}else {
+				System.out.println(vs.getVisitorName()+" did not have enough money.");
+				return null;
+			}
 		}else {
-			System.out.println(vs.getVisitorName()+" did not have enough money.");
+			System.out.println("Sold out");
 			return null;
 		}
 		

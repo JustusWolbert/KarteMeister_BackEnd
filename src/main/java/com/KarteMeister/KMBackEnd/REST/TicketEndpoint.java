@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.KarteMeister.KMBackEnd.controller.AttractionService;
+import com.KarteMeister.KMBackEnd.controller.ProfileService;
 import com.KarteMeister.KMBackEnd.controller.PurchaseService;
 import com.KarteMeister.KMBackEnd.domein.Attraction;
 import com.KarteMeister.KMBackEnd.domein.Ticket;
@@ -17,6 +19,10 @@ import com.KarteMeister.KMBackEnd.domein.Ticket;
 public class TicketEndpoint {
 	@Autowired
 	PurchaseService ps;
+	@Autowired
+	AttractionService as;
+	@Autowired
+	ProfileService profs;
 	
 	@GetMapping("ticket/{ticketId}/")
 	public Ticket xmlGetter(@PathVariable("ticketId") long ticketId){
@@ -25,10 +31,10 @@ public class TicketEndpoint {
 		return tckt;
 	}
 	
-	@PostMapping("{VisitorId}/{EventId}/ticket")
-	public void xmlPoster(@RequestBody Ticket tckt,@PathVariable("EventId") long EventId,@PathVariable("VisitorId") long VisitorId){
+	@PostMapping("{visitorName}/{eventName}/purchase")
+	public void purchaseTicket(@RequestBody Ticket tckt, @PathVariable("visitorName") String visitorName, @PathVariable("eventName") String eventName) {
 		System.out.println("Received ticket: "+tckt.getId());
-		ps.PostTicketEntry(tckt, EventId, VisitorId);
+		ps.PostTicketEntry(tckt, as.getEventEntry(eventName).getId(), profs.getVisitorEntry(visitorName).getId());
 	}
 	
 //	@PutMapping("ticket/change/{firstValue}/{secondValue}/")
