@@ -24,7 +24,7 @@ public class Visitor {
     private String password;
     
     @OneToMany(mappedBy="visitor")
-    @JsonIgnoreProperties(value = "ticketList")
+    //@JsonIgnoreProperties(value = "ticketList")
     private List<Ticket> ticketList;	
 
 	public long getId() {

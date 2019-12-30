@@ -31,26 +31,43 @@ public class AttractionEndpoint {
 			Event ev = new Event();
 			ev.setId(e.getId());
 			eventList.add(ev);
+			System.out.println(ev.getId());
 		}
 		attr.setEventList(eventList);	
 		return attr;
-	}
-	
-	@PostMapping("{organiserId}/attraction")
-	public void xmlPoster(@RequestBody Attraction attr, @PathVariable("organiserId") long id){
-		System.out.println("Received: "+ attr.getAttractionName());
-
-		as.postAttractionEntry(attr, id); 	//needs organiser ID
 	}
 	
 	@GetMapping("attraction/all") 
 	public List<Attraction> xmlGetAll(){
 		System.out.println("send all attractions");
 		List<Attraction> attrList = as.findAll();
-		return attrList;
+		List<Attraction> returnList = new ArrayList();
+		for(Attraction a : attrList) {
+			List<Event> eventList = new ArrayList();
+			for(Event e : a.getEventList()) {
+				Event ev = new Event();
+				ev.setId(e.getId());
+				eventList.add(ev);
+				System.out.println(ev.getId());
+			}
+			a.setEventList(eventList);
+			returnList.add(a);
+		}
+		return returnList;
 	}
 	
+	@PostMapping("{organiserId}/attraction")
+	public void xmlPoster(@RequestBody Attraction attr, @PathVariable("organiserId") long id){
+		System.out.println("Received: "+ attr.getAttractionName());
+		as.postAttractionEntry(attr, id); 	//needs organiser ID
+	}
 	
+	@GetMapping("{artistName}/allEvents")
+	public List<Event> getAllEvents(@PathVariable("artistName") String artistName){
+		System.out.println("Send all events");
+		List<Event> eventList = as.getAllEventsByAttractionId(artistName);
+		return eventList;
+	}
 	
 	@PutMapping("attraction/change/{artistName}/{category}/")
 	public void xmlPut(@PathVariable("artistName") String artistName, @PathVariable("category") String category){

@@ -36,13 +36,13 @@ public class Event {
 	private double priceConsumption;
 	
 	@OneToMany(mappedBy="event", orphanRemoval=true, cascade=CascadeType.ALL)
-	@JsonIgnoreProperties(value = "ticketList")
+	//@JsonIgnoreProperties(value = "ticketList")
 	private List<Ticket> ticketList;
 	
 	@ManyToOne//(fetch = FetchType.EAGER)
 	@JoinColumn(name="attraction_id", nullable=false)
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@JsonManagedReference
+	//@JsonManagedReference
 	private Attraction attraction;
 	
 	public long getId() {
@@ -132,6 +132,13 @@ public class Event {
 	public void sellTicket() {
 		this.amountTicket -= 1;
 		
+	}
+	
+	public List<Ticket> getTicketList() {
+		return ticketList;
+	}
+	public void setTicketList(List<Ticket> ticketList) {
+		this.ticketList = ticketList;
 	}
 	
 	

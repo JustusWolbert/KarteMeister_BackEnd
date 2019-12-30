@@ -28,7 +28,6 @@ public class ImageEndpoint {
 		Image i = new Image();
 		i.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
 		
-		
 		ir.save(i);
 		
 	}

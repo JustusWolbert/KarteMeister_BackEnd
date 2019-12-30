@@ -29,13 +29,13 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name="event_id", nullable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonManagedReference
+    //@JsonManagedReference
     private Event event;
     
     @ManyToOne
     @JoinColumn(name="visitor_id", nullable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonManagedReference
+    //@JsonManagedReference
     private Visitor visitor;
     
    
