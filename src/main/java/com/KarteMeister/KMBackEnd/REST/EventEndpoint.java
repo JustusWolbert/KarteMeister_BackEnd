@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.KarteMeister.KMBackEnd.controller.AttractionRepository;
 import com.KarteMeister.KMBackEnd.controller.AttractionService;
-import com.KarteMeister.KMBackEnd.domein.Attraction;
 import com.KarteMeister.KMBackEnd.domein.Event;
 import com.KarteMeister.KMBackEnd.domein.Ticket;
 
@@ -28,7 +27,7 @@ public class EventEndpoint {
 	public Event xmlGetter(@PathVariable("eventName") String eventName) {
 		System.out.println("send");
 		Event ev = as.getEventEntry(eventName);
-		List<Ticket> ticketList = new ArrayList();
+		List<Ticket> ticketList = new ArrayList<Ticket>();
 		for(Ticket t : ev.getTicketList()) {
 			Ticket tckt = new Ticket();
 			tckt.setId(t.getId());
@@ -48,9 +47,9 @@ public class EventEndpoint {
 	public List<Event> xmlGetAll(){
 		System.out.println("send all attractions");
 		List<Event> eventList = as.getAllEvents();
-		List<Event> returnList = new ArrayList();
+		List<Event> returnList = new ArrayList<Event>();
 		for(Event a : eventList) {
-			List<Ticket> eList = new ArrayList();
+			List<Ticket> eList = new ArrayList<Ticket>();
 			for(Ticket t : a.getTicketList()) {
 				Ticket tckt = new Ticket();
 				tckt.setId(t.getId());

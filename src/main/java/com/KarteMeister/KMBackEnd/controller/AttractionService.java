@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.KarteMeister.KMBackEnd.domein.Attraction;
 import com.KarteMeister.KMBackEnd.domein.Event;
-import com.KarteMeister.KMBackEnd.domein.Image;
 import com.KarteMeister.KMBackEnd.domein.Organiser;
 
 @Service

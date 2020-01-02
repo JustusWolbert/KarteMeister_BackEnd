@@ -16,6 +16,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
  
+@SuppressWarnings("unused")
 @Component
 public class SimpleCORSFilter extends OncePerRequestFilter {
  

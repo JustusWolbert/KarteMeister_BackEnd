@@ -3,7 +3,6 @@ package com.KarteMeister.KMBackEnd.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.KarteMeister.KMBackEnd.domein.Attraction;
 import com.KarteMeister.KMBackEnd.domein.Event;
 import com.KarteMeister.KMBackEnd.domein.Organiser;
 import com.KarteMeister.KMBackEnd.domein.SalesAdmin;
