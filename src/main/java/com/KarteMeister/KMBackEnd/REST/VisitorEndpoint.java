@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.KarteMeister.KMBackEnd.controller.AttractionService;
 import com.KarteMeister.KMBackEnd.controller.ProfileService;
 import com.KarteMeister.KMBackEnd.controller.PurchaseService;
-import com.KarteMeister.KMBackEnd.domein.Event;
 import com.KarteMeister.KMBackEnd.domein.Ticket;
 import com.KarteMeister.KMBackEnd.domein.Visitor;
 
@@ -31,7 +30,7 @@ public class VisitorEndpoint {
 	public Visitor getVisitor(@PathVariable("visitorName") String visitorName) {
 		System.out.println("send");
 		Visitor v = profs.getVisitorEntry(visitorName);
-		List<Ticket> ticketList = new ArrayList();
+		List<Ticket> ticketList = new ArrayList<Ticket>();
 		for(Ticket t : v.getTicketList()) {
 			Ticket tckt = new Ticket();
 			tckt.setId(t.getId());

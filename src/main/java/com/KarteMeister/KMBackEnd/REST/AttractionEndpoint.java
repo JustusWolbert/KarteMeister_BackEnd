@@ -26,7 +26,7 @@ public class AttractionEndpoint {
 	public Attraction xmlGetter(@PathVariable("artistName") String artistName){
 		System.out.println("send");
 		Attraction attr = as.getAttractionEntry(artistName);
-		List<Event> eventList = new ArrayList();
+		List<Event> eventList = new ArrayList<Event>();
 		for(Event e : attr.getEventList()) {
 			Event ev = new Event();
 			ev.setId(e.getId());
@@ -41,9 +41,9 @@ public class AttractionEndpoint {
 	public List<Attraction> xmlGetAll(){
 		System.out.println("send all attractions");
 		List<Attraction> attrList = as.findAll();
-		List<Attraction> returnList = new ArrayList();
+		List<Attraction> returnList = new ArrayList<Attraction>();
 		for(Attraction a : attrList) {
-			List<Event> eventList = new ArrayList();
+			List<Event> eventList = new ArrayList<Event>();
 			for(Event e : a.getEventList()) {
 				Event ev = new Event();
 				ev.setId(e.getId());

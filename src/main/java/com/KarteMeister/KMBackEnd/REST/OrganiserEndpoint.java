@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.KarteMeister.KMBackEnd.controller.ProfileService;
 import com.KarteMeister.KMBackEnd.domein.Attraction;
-import com.KarteMeister.KMBackEnd.domein.Event;
 import com.KarteMeister.KMBackEnd.domein.Organiser;
-import com.KarteMeister.KMBackEnd.domein.Visitor;
 
 @RestController
 public class OrganiserEndpoint {
@@ -26,7 +24,7 @@ public class OrganiserEndpoint {
 	public Organiser getOrganiser(@PathVariable("organiserName") String organiserName){
 		System.out.println("send");
 		Organiser org = profs.getOrganiserEntry(organiserName);
-		List<Attraction> attrList = new ArrayList();
+		List<Attraction> attrList = new ArrayList<Attraction>();
 		for(Attraction a : org.getAttractionList()) {
 			Attraction attr = new Attraction();
 			attr.setId(a.getId());

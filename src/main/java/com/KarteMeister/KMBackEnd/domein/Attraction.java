@@ -1,11 +1,8 @@
 package com.KarteMeister.KMBackEnd.domein;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,12 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 
 @Entity
 public class Attraction {
@@ -31,6 +24,12 @@ public class Attraction {
 	private String category;
 	private String description;
 	
+	private String imageName;
+	
+	
+
+
+
 	//@JsonBackReference
 	@OneToMany(mappedBy="attraction", orphanRemoval=true /*, cascade=CascadeType.ALL*/)
 	//@JsonIgnoreProperties(value = "eventList")
@@ -98,6 +97,12 @@ public class Attraction {
 		this.organiser = organiser;
 	}
 
-	
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
 	
 }

@@ -4,7 +4,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
+
 
 import com.KarteMeister.KMBackEnd.controller.AttractionService;
 import com.KarteMeister.KMBackEnd.controller.ProfileService;
@@ -22,7 +22,7 @@ public class KarteMeisterInitializer {
 	private final AttractionService attractionService;
 	private final ProfileService profileService;
 	private final PurchaseService purchaseService;
-	
+		
 	
 	@Autowired
 	public KarteMeisterInitializer(AttractionService attractionService, ProfileService profileService, PurchaseService purchaseService) {
@@ -31,14 +31,17 @@ public class KarteMeisterInitializer {
 		this.purchaseService = purchaseService;
 	}
 	
+	@SuppressWarnings("unused")
 	@PostConstruct
 	public void init() {
+		
 		SalesAdmin sa = createSalesAdmin(0);
 		Organiser org1 = createOrganiser("Frits", "Spits","Mits", 100);
 		
-		Attraction attr1 = createAttraction("13TH HOUR TOUR", "Jo Hoode","Cyberpunk techno","After the first 12 hours, Jo is finally back with with his distinct early 2000s cyberpunk flavour. Get ready to pumps fists and get jiggly with Jo Hoode.",profileService.getOrganiserEntry(org1.getName()).getId());
-		Attraction attr2 = createAttraction("Jump around","DJ Spring and Boot","Jumpstyle","Golden oldies from 2003.",profileService.getOrganiserEntry(org1.getName()).getId());
-
+		Attraction attr1 = createAttraction("13TH HOUR TOUR", "Jo Hoode","Cyberpunk techno","After the first 12 hours, Jo is finally back with his distinct early 2000s cyberpunk flavour. Get ready to pump fists and get jiggly with Jo Hoode.","attraction1",profileService.getOrganiserEntry(org1.getName()).getId());
+		Attraction attr2 = createAttraction("Jump around","DJ Spring and Boot","Jumpstyle","Golden oldies from 2003.","attraction2",profileService.getOrganiserEntry(org1.getName()).getId());
+		Attraction attr3 = createAttraction("Boerenprotest", "Normaal", "Heukmuziek", "Daar moeten ze wat aan doen in Den Haag!","attraction3", profileService.getOrganiserEntry(org1.getName()).getId());
+		Attraction attr4 = createAttraction("Vrijmibo", "Object", "borrel", "Traineeship is klaar, daar moet op gedronken worden!!","attraction4", profileService.getOrganiserEntry(org1.getName()).getId());
 //		Organiser oa = profileService.getOrganiserEntry("K. Niebal");
 //		attractionService.postAttractionEntry(attr1, oa.getId());
 //		attractionService.postAttractionEntry(attr2, oa.getId());
@@ -46,9 +49,13 @@ public class KarteMeisterInitializer {
 		Event event1 = createEvent("QUARTER PAST-FEST","Rotterdam","Maassilo","13-04 13:15","Get in the mood with Hoode at the Maassilo, reachable by metro, tram, bus, bike, car, boat, and horse. Be there. You know you want to. Get your booze in advance, lockers are available on site.",450,42.50,true,true,
 									1,2.60,	attractionService.getAttractionEntry("Jo Hoode").getId());
 		Event event2 = createEvent("HALF PAST-FEST","Utrecht","DBs","14-04 13:30","You thought the QUARTER PAST-FEST was brutal? Go beyond every limit you've ever thought possible in DBs and party with the dude, Jo Hoode. Consumptions available in advance, no lockers on site.",150,31.50,false,true,
-				1,2.60,	attractionService.getAttractionEntry("Jo Hoode").getId());
-		Event event3 = createEvent("JUMPEEEH","Amsterdam","Leidsche Plein","03-10 17:00","Leidsche Plein op z'n kop joee",200,55.50,false,true,
-				1,2.60,	attractionService.getAttractionEntry("DJ Spring and Boot").getId());
+									1,2.60,	attractionService.getAttractionEntry("Jo Hoode").getId());
+		Event event3 = createEvent("BLAST FROM THE PAST-FEST","Tilburg","013","15-04 21:30","Remember the Maassilo? Here we go again! Get your booze in advance, lockers are available on site.",320,22.50,true,true,
+									1,2.60,	attractionService.getAttractionEntry("Jo Hoode").getId());
+		Event event4 = createEvent("GET JAZZED-FEST","Maastricht","Club Vibes","14-05 11:30","Experimental acoustic jazz session with Jo Hoode. Consumptions available in advance, no lockers on site.",150,31.50,false,true,
+									1,2.60,	attractionService.getAttractionEntry("Jo Hoode").getId());
+		Event event5 = createEvent("SNAZZ-FEST","Amsterdam","Leidsche Plein","03-10 17:00","We've had so many fests, we don't know what the hell is going on anymore. See you there, no lockers.",200,55.50,false,true,
+									1,2.60,	attractionService.getAttractionEntry("Jo Hoode").getId());
 
 		Visitor vstr1 = createVisitor("Fritsje van Sonnewende","FritsMeister","wachtwoord1",170.25);
 		
@@ -59,8 +66,6 @@ public class KarteMeisterInitializer {
 		Ticket tick2 = createTicket(true, false, 10, 
 				attractionService.getEventEntry("HALF PAST-FEST").getId(),
 				profileService.getVisitorEntry("FritsMeister").getId());
-
-			
 	}
 	
 	private SalesAdmin createSalesAdmin(double wallet) {
@@ -79,12 +84,13 @@ public class KarteMeisterInitializer {
 		return profileService.postOrganiserEntry(o);
 	}
 		
-	private Attraction createAttraction(String attractionName, String artistName, String category, String description, long id) {
+	private Attraction createAttraction(String attractionName, String artistName, String category, String description, String imageName, long id) {
 		Attraction a = new Attraction();
 		a.setAttractionName(attractionName);
 		a.setArtistName(artistName);
 		a.setCategory(category);
 		a.setDescription(description);
+		a.setImageName(imageName);
 		return attractionService.postAttractionEntry(a, id);
 	}
 
