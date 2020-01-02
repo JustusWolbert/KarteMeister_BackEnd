@@ -62,7 +62,7 @@ public class PurchaseService {
 				sad.setWallet(sad.getWallet()+tckt.getTicketPrice()-split);
 				sa.save(sad);
 				
-				System.out.println(vs.getVisitorName()+" bought ticket "+tckt.getId());
+				System.out.println(vs.getVisitorName()+" bought ticket");
 				tr.save(tckt);
 				return tckt;
 			}else {
