@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.KarteMeister.KMBackEnd.controller.AttractionRepository;
 import com.KarteMeister.KMBackEnd.controller.AttractionService;
+import com.KarteMeister.KMBackEnd.domein.Attraction;
 import com.KarteMeister.KMBackEnd.domein.Event;
 import com.KarteMeister.KMBackEnd.domein.Ticket;
 
@@ -66,9 +67,26 @@ public class EventEndpoint {
 		as.deleteEvent(eventName, venue);
 	}
 	
-	
+	@GetMapping("{artistName}/allEvents")
+	public List<Event> getAllEvents(@PathVariable("artistName") String artistName){
+		System.out.println("Send all events for "+artistName);
+		List<Event> eventList = as.getAllEventsByAttractionId(artistName);
+		List<Event> returnList = new ArrayList<Event>();
+		for(Event a : eventList) {
+			List<Ticket> eList = new ArrayList<Ticket>();
+			for(Ticket t : a.getTicketList()) {
+				Ticket tckt = new Ticket();
+				tckt.setId(t.getId());
+				eList.add(tckt);
+			}
+			a.setTicketList(eList);
+			a.setAttraction(null);
+			returnList.add(a);
+		}
+		return returnList;
+	}
 
-	
+
 	
 }
 

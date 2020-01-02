@@ -62,13 +62,6 @@ public class AttractionEndpoint {
 		as.postAttractionEntry(attr, id); 	//needs organiser ID
 	}
 	
-	@GetMapping("{artistName}/allEvents")
-	public List<Event> getAllEvents(@PathVariable("artistName") String artistName){
-		System.out.println("Send all events");
-		List<Event> eventList = as.getAllEventsByAttractionId(artistName);
-		return eventList;
-	}
-	
 	@PutMapping("attraction/change/{artistName}/{category}/")
 	public void xmlPut(@PathVariable("artistName") String artistName, @PathVariable("category") String category){
 		as.setCategoryForAttraction( artistName, category);
