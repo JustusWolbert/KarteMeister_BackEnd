@@ -36,28 +36,28 @@ public class KarteMeisterInitializer {
 		SalesAdmin sa = createSalesAdmin(0);
 		Organiser org1 = createOrganiser("Frits", "Spits","Mits", 100);
 		
-		Attraction attr1 = createAttraction("Beat Bumpers", "DJ Spring and Boot","Techno","Stamp stamp stamp!",profileService.getOrganiserEntry(org1.getName()).getId());
-		Attraction attr2 = createAttraction("Counter-counterpoints","Steve Reich","Minimal","Min going to the max.",profileService.getOrganiserEntry(org1.getName()).getId());
-		
+		Attraction attr1 = createAttraction("13TH HOUR TOUR", "Jo Hoode","Cyberpunk techno","After the first 12 hours, Jo is finally back with with his distinct early 2000s cyberpunk flavour. Get ready to pumps fists and get jiggly with Jo Hoode.",profileService.getOrganiserEntry(org1.getName()).getId());
+		Attraction attr2 = createAttraction("Jump around","DJ Spring and Boot","Jumpstyle","Golden oldies from 2003.",profileService.getOrganiserEntry(org1.getName()).getId());
+
 //		Organiser oa = profileService.getOrganiserEntry("K. Niebal");
 //		attractionService.postAttractionEntry(attr1, oa.getId());
 //		attractionService.postAttractionEntry(attr2, oa.getId());
 		
-		Event event1 = createEvent("Feestteam","Leiden","B&C","03-10 17:00","Feestje in de bieb",200,12.50,true,true,
-									1,2.60,	attractionService.getAttractionEntry("Steve Reich").getId());
-		Event event2 = createEvent("Party crew","Utrecht","B&C","03-10 17:00","Biebje op het feest",150,11.50,true,false,
-				1,2.60,	attractionService.getAttractionEntry("Steve Reich").getId());
-		Event event3 = createEvent("Nikki en Nakki","Amsterdam","Leidsche Plein","03-10 17:00","Leidsche Plein op z'n kop joee",200,55.50,false,true,
+		Event event1 = createEvent("QUARTER PAST-FEST","Rotterdam","Maassilo","13-04 13:15","Get in the mood with Hoode at the Maassilo, reachable by metro, tram, bus, bike, car, boat, and horse. Be there. You know you want to. Get your booze in advance, lockers are available on site.",450,42.50,true,true,
+									1,2.60,	attractionService.getAttractionEntry("Jo Hoode").getId());
+		Event event2 = createEvent("HALF PAST-FEST","Utrecht","DBs","14-04 13:30","You thought the QUARTER PAST-FEST was brutal? Go beyond every limit you've ever thought possible in DBs and party with the dude, Jo Hoode. Consumptions available in advance, no lockers on site.",150,31.50,false,true,
+				1,2.60,	attractionService.getAttractionEntry("Jo Hoode").getId());
+		Event event3 = createEvent("JUMPEEEH","Amsterdam","Leidsche Plein","03-10 17:00","Leidsche Plein op z'n kop joee",200,55.50,false,true,
 				1,2.60,	attractionService.getAttractionEntry("DJ Spring and Boot").getId());
 
-		Visitor vstr1 = createVisitor("Fritsje van Sonnewende","FritsMeister","wachtwoord1",100.25);
+		Visitor vstr1 = createVisitor("Fritsje van Sonnewende","FritsMeister","wachtwoord1",170.25);
 		
 		Ticket tick1 = createTicket(true, true, 25, 
-				attractionService.getEventEntry("Feestteam").getId(),
+				attractionService.getEventEntry("QUARTER PAST-FEST").getId(),
 				profileService.getVisitorEntry("FritsMeister").getId());
 				
 		Ticket tick2 = createTicket(true, false, 10, 
-				attractionService.getEventEntry("Feestteam").getId(),
+				attractionService.getEventEntry("HALF PAST-FEST").getId(),
 				profileService.getVisitorEntry("FritsMeister").getId());
 
 			
